@@ -1,0 +1,8 @@
+{
+    "debian": {
+        "image": "debian:latest",
+        "features": {
+            "bun": {}
+        }
+    }
+}
