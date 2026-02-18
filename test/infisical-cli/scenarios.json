@@ -4,11 +4,5 @@
         "features": {
             "infisical-cli": {}
         }
-    },
-    "ubuntu": {
-        "image": "ubuntu:latest",
-        "features": {
-            "infisical-cli": {}
-        }
     }
 }

@@ -4,11 +4,5 @@
         "features": {
             "hcloud-cli": {}
         }
-    },
-    "ubuntu": {
-        "image": "ubuntu:latest",
-        "features": {
-            "hcloud-cli": {}
-        }
     }
 }
