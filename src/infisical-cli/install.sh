@@ -20,19 +20,26 @@ fi
 
 # Install prerequisites
 apt-get -y update
-apt-get -y install --no-install-recommends curl ca-certificates
+apt-get -y install --no-install-recommends curl ca-certificates jq
 
-# Run Infisical setup script
-curl -1sLf 'https://artifacts-cli.infisical.com/setup.deb.sh' | bash
-apt-get -y update
-
-# Install latest or selected version
+# Fetch latest version if needed
 if [ "${CLI_VERSION}" = "latest" ]; then
-    apt-get -y install infisical
-else
-    # Normalize version input: accept v1.2.0 or 1.2.0 -> remove leading v
-    apt-get -y install "infisical=${CLI_VERSION#v}"
+    CLI_VERSION=$(curl -s https://api.github.com/repos/infisical/cli/releases/latest | jq -r '.tag_name' | awk '{print substr($1, 2)}')
 fi
+
+# Download URL with normalized version input
+DDOWNLOAD_URL="https://github.com/Infisical/cli/releases/download/v${CLI_VERSION#v}/infisical_${CLI_VERSION#v}_linux_${ARCH}.deb"
+
+# Set temporary location for debian binary
+tmp=/tmp/infisical.deb
+
+# Download and install infisical
+echo "Downloading infisical from ${DOWNLOAD_URL}"
+curl -sSL "${DOWNLOAD_URL}" -o "$tmp" 
+apt-get -y install ./"$tmp"
+
+# Remove binary after installation
+rm -f "$tmp"
 
 # Clean up
 apt-get -y clean
