@@ -35,7 +35,7 @@ else
 fi
 
 # Download URL with normalized version input
-DDOWNLOAD_URL="https://github.com/infisical/cli/releases/download/v${CLI_VERSION#v}/infisical_${CLI_VERSION#v}_linux_${ARCH}.deb"
+DOWNLOAD_URL="https://github.com/infisical/cli/releases/download/v${CLI_VERSION#v}/infisical_${CLI_VERSION#v}_linux_${ARCH}.deb"
 
 # Set temporary location for debian binary
 tmp=/tmp/infisical.deb
