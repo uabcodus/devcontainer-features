@@ -18,6 +18,10 @@ if [ "${ID}" != "debian" ] && [ "${ID_LIKE}" != "debian" ]; then
     exit 1
 fi
 
+# Install prerequisites
+apt-get -y update
+apt-get -y install --no-install-recommends curl ca-certificates gpg
+
 # Add Stripe CLI’s GPG key to the apt sources keyring
 curl -s https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public | gpg --dearmor | sudo tee /usr/share/keyrings/stripe.gpg
 
