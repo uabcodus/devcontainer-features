@@ -3,12 +3,12 @@ name: Publish Features
 on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch:
 
 jobs:
   publish:
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
 
     permissions:
@@ -24,5 +24,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          publish-features: 'true'
+          publish-features: "true"
           base-path-to-features: ./src
