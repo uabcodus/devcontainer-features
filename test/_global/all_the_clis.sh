@@ -12,6 +12,7 @@ source dev-container-features-test-lib
 # check <LABEL> <cmd> [args...]
 check "check for hcloud" hcloud version
 check "check for infisical" infisical --version
+check "check for bun" bun --version
 
 # Report results
 # If any of the checks above exited with a non-zero exit code, the test will fail.
