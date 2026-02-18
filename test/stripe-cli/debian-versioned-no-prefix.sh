@@ -7,13 +7,14 @@ set -e
 # Provides the 'check' and 'reportResults' commands.
 source dev-container-features-test-lib
 
-# Feature-specific tests
+# Definition specific tests
+. /etc/os-release
+
+# Scenario-specific tests
 # The 'check' command comes from the dev-container-features-test-lib. Syntax is...
 # check <LABEL> <cmd> [args...]
-check "check for hcloud" hcloud version
-check "check for infisical" infisical --version
-check "check for bun" bun --version
-check "check for stripe" stripe version
+check "distro" test "${ID}" = "debian"
+check "stripe version matches ..." bash -c '[ "$(stripe version | grep -Eo "[0-9]+\.[0-9]+\.[0-9]+" | head -n1)" = "1.30.0" ]'
 
 # Report results
 # If any of the checks above exited with a non-zero exit code, the test will fail.

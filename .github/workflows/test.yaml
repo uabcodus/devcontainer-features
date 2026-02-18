@@ -17,6 +17,7 @@ jobs:
         features:
           - infisical-cli
           - bun
+          - stripe-cli
         baseImage:
           - debian:latest
           - mcr.microsoft.com/devcontainers/base:debian
@@ -40,6 +41,7 @@ jobs:
         features:
           - infisical-cli
           - bun
+          - stripe-cli
 
     steps:
       - name: Checkout

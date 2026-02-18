@@ -1,0 +1,24 @@
+{
+    "debian": {
+        "image": "debian:latest",
+        "features": {
+            "infisical-cli": {}
+        }
+    },
+    "debian-versioned": {
+        "image": "debian:latest",
+        "features": {
+            "infisical-cli": {
+                "version": "v1.30.0"
+            }
+        }
+    },
+    "debian-versioned-no-prefix": {
+        "image": "debian:latest",
+        "features": {
+            "infisical-cli": {
+                "version": "1.30.0"
+            }
+        }
+    }
+}
