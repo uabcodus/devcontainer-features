@@ -42,7 +42,7 @@ tmp=/tmp/infisical.deb
 
 # Download and install infisical
 echo "Downloading infisical from ${DOWNLOAD_URL}"
-curl -sSL "${DOWNLOAD_URL}" -o "$tmp" 
+curl -fsSL "${DOWNLOAD_URL}" -o "$tmp" 
 apt-get -y install ./"$tmp"
 
 # Remove binary after installation
