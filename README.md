@@ -9,8 +9,9 @@ Inspired by [this repository](https://github.com/uabcodus/devcontainer-features)
 This repository contains a _collection_ of dev container Features.
 Please take a closer look at the detailed instructions for the individual features:
 
-- [Hetzner Cloud CLI](src/hcloud-cli)
+- [Bun Runtime](src/bun)
 - [Infisical CLI](src/infisical-cli)
+- [Stripe CLI](src/stripe-cli)
 
 ## Repo and Feature Structure
 
@@ -19,21 +20,36 @@ Each Feature has its own sub-folder, containing at least a `devcontainer-feature
 
 ```
 ├── src
-│   ├── hcloud-cli
+│   ├── bun
 │   │   ├── devcontainer-feature.json
 │   │   └── install.sh
 │   ├── infisical-cli
+│   │   ├── devcontainer-feature.json
+│   │   └── install.sh
+│   ├── stripe-cli
 │   │   ├── devcontainer-feature.json
 │   │   └── install.sh
 ├── test
 │   ├── __global
 │   │   ├── all_the_clis.sh
 │   │   └── scenarios.json
-│   ├── hcloud-cli
+│   ├── bun
 │   │   ├── scenarios.json
+│   │   ├── debian.json
+│   │   ├── debian-versioned.json
+│   │   ├── debian-versioned-no-prefix.json
 │   │   └── test.sh
 │   ├── infisical-cli
 │   │   ├── scenarios.json
+│   │   ├── debian.json
+│   │   ├── debian-versioned.json
+│   │   ├── debian-versioned-no-prefix.json
+│   │   └── test.sh
+│   ├── stripe-cli
+│   │   ├── scenarios.json
+│   │   ├── debian.json
+│   │   ├── debian-versioned.json
+│   │   ├── debian-versioned-no-prefix.json
 │   │   └── test.sh
 ...
 ```
