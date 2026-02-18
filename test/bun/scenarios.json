@@ -4,5 +4,21 @@
         "features": {
             "bun": {}
         }
+    },
+    "debian-versioned": {
+        "image": "debian:latest",
+        "features": {
+            "bun": {
+                "version": "v1.3.0"
+            }
+        }
+    },
+    "debian-versioned-no-prefix": {
+        "image": "debian:latest",
+        "features": {
+            "bun": {
+                "version": "1.3.0"
+            }
+        }
     }
 }

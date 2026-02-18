@@ -1,5 +1,5 @@
 {
-    "all_the_clis": {
+    "all_the_features": {
         "image": "ubuntu:latest",
         "features": {
             "hcloud-cli": {},

@@ -4,5 +4,21 @@
         "features": {
             "infisical-cli": {}
         }
+    },
+    "debian-versioned": {
+        "image": "debian:latest",
+        "features": {
+            "bun": {
+                "version": "v0.43.0"
+            }
+        }
+    },
+    "debian-versioned-no-prefix": {
+        "image": "debian:latest",
+        "features": {
+            "bun": {
+                "version": "0.43.0"
+            }
+        }
     }
 }
