@@ -20,24 +20,26 @@ fi
 
 # Install prerequisites
 apt-get -y update
-apt-get -y install --no-install-recommends curl ca-certificates gpg
+apt-get -y install --no-install-recommends curl ca-certificates jq git
 
-# Add Stripe CLI’s GPG key to the apt sources keyring
-curl -s https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public | gpg --dearmor | tee /usr/share/keyrings/stripe.gpg
-
-# Add CLI’s apt repository to the apt sources list
-echo "deb [signed-by=/usr/share/keyrings/stripe.gpg] https://packages.stripe.dev/stripe-cli-debian-local stable main" | tee -a /etc/apt/sources.list.d/stripe.list
-
-# Update the package list
-apt-get -y update
-
-# Install latest or selected version
+# Fetch latest version if needed
 if [ "${CLI_VERSION}" = "latest" ]; then
-    apt-get -y install stripe
-else
-    # Normalize version input: accept v1.2.0 or 1.2.0 -> remove leading v
-    apt-get -y install "stripe=v${CLI_VERSION#v}"
+    CLI_VERSION=$(curl -s https://api.github.com/repos/stripe/stripe-cli/releases/latest | jq -r '.tag_name' | awk '{print substr($1, 2)}')
 fi
+
+# Download URL with normalize version input
+DOWNLOAD_URL="https://github.com/stripe/stripe-cli/releases/download/v${CLI_VERSION#v}/stripe_${CLI_VERSION#v}_linux_${ARCH}.deb"
+
+# Set temporary location for debian binary
+tmp=/tmp/stripe.deb
+
+# Download and install stripe
+echo "Downloading stripe from ${DOWNLOAD_URL}"
+curl -sSL "${DOWNLOAD_URL}" -o "$tmp" 
+apt-get -y install ./"$tmp"
+
+# Remove binary after installation
+rm -f "$tmp"
 
 # Clean up
 apt-get -y clean
