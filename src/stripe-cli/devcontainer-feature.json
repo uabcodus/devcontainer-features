@@ -1,0 +1,20 @@
+{
+    "id": "stripe-cli",
+    "version": "1.0.0",
+    "name": "Stripe CLI",
+    "documentationURL": "https://github.com/uabcodus/devcontainer-features/tree/master/src/stripe-cli",
+    "description": "Installs Stripe CLI (stripe).",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "latest"
+            ],
+            "default": "latest",
+            "description": "Select or enter a stripe-cli version."
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}

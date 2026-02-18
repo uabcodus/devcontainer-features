@@ -20,11 +20,11 @@ fi
 
 # Install prerequisites
 apt-get -y update
-apt-get -y install --no-install-recommends curl ca-certificates jq
+apt-get -y install --no-install-recommends curl ca-certificates jq git
 
 # Fetch latest version if needed
 if [ "${CLI_VERSION}" = "latest" ]; then
-    CLI_VERSION=$(curl -s https://api.github.com/repos/infisical/cli/releases/latest | jq -r '.tag_name' | awk '{print substr($1, 2)}')
+    CLI_VERSION=$(curl -s https://api.github.com/repos/stripe/stripe-cli/releases/latest | jq -r '.tag_name' | awk '{print substr($1, 2)}')
 fi
 
 # Detect current machine architecture
@@ -35,13 +35,13 @@ else
 fi
 
 # Download URL with normalized version input
-DOWNLOAD_URL="https://github.com/infisical/cli/releases/download/v${CLI_VERSION#v}/infisical_${CLI_VERSION#v}_linux_${ARCH}.deb"
+DOWNLOAD_URL="https://github.com/stripe/stripe-cli/releases/download/v${CLI_VERSION#v}/stripe_${CLI_VERSION#v}_linux_${ARCH}.deb"
 
 # Set temporary location for debian binary
-tmp=/tmp/infisical.deb
+tmp=/tmp/stripe.deb
 
-# Download and install infisical
-echo "Downloading infisical from ${DOWNLOAD_URL}"
+# Download and install stripe
+echo "Downloading stripe from ${DOWNLOAD_URL}"
 curl -fsSL "${DOWNLOAD_URL}" -o "$tmp" 
 apt-get -y install "$tmp"
 

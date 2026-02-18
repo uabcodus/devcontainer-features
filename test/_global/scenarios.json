@@ -4,7 +4,8 @@
         "features": {
             "hcloud-cli": {},
             "infisical-cli": {},
-            "bun": {}
+            "bun": {},
+            "stripe-cli": {}
         }
     }
 }
