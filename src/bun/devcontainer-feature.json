@@ -1,0 +1,20 @@
+{
+    "id": "bun",
+    "version": "1.0.0",
+    "name": "Bun binary",
+    "documentationURL": "https://github.com/uabcodus/devcontainer-features/tree/master/src/bun",
+    "description": "Installs the Bun binary (bun).",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "latest"
+            ],
+            "default": "latest",
+            "description": "Select or enter a Bun version."
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
