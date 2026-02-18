@@ -15,16 +15,11 @@ jobs:
     strategy:
       matrix:
         features:
-          - gitlab-cli
-          - hcloud-cli
           - infisical-cli
-          - mailpit
-          - terraform-backend-git
+          - bun
         baseImage:
           - debian:latest
-          - ubuntu:latest
           - mcr.microsoft.com/devcontainers/base:debian
-          - mcr.microsoft.com/devcontainers/base:ubuntu
 
     steps:
       - name: Checkout
@@ -43,11 +38,8 @@ jobs:
     strategy:
       matrix:
         features:
-          - gitlab-cli
-          - hcloud-cli
           - infisical-cli
-          - mailpit
-          - terraform-backend-git
+          - bun
 
     steps:
       - name: Checkout

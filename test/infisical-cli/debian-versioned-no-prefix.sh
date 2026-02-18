@@ -13,8 +13,8 @@ source dev-container-features-test-lib
 # Scenario-specific tests
 # The 'check' command comes from the dev-container-features-test-lib. Syntax is...
 # check <LABEL> <cmd> [args...]
-check "distro" test "${ID}" = "ubuntu"
-check "check for hcloud" hcloud version
+check "distro" test "${ID}" = "debian"
+check "infisical version matches ..." bash -c '[ "$(infisical --version | grep -Eo "[0-9]+\.[0-9]+\.[0-9]+" | head -n1)" = "0.43.51" ]'
 
 # Report results
 # If any of the checks above exited with a non-zero exit code, the test will fail.

@@ -7,11 +7,14 @@ set -e
 # Provides the 'check' and 'reportResults' commands.
 source dev-container-features-test-lib
 
-# Feature-specific tests
+# Definition specific tests
+. /etc/os-release
+
+# Scenario-specific tests
 # The 'check' command comes from the dev-container-features-test-lib. Syntax is...
 # check <LABEL> <cmd> [args...]
-check "check for hcloud" hcloud version
-check "check for infisical" infisical --version
+check "distro" test "${ID}" = "debian"
+check "bun version matches non-prefixed input" bash -c '[ "$(bun --version)" = "1.3.0" ]'
 
 # Report results
 # If any of the checks above exited with a non-zero exit code, the test will fail.

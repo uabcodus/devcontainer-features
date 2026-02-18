@@ -1,12 +1,10 @@
 {
-    "all_the_clis": {
+    "all_the_features": {
         "image": "ubuntu:latest",
         "features": {
-            "gitlab-cli": {},
             "hcloud-cli": {},
             "infisical-cli": {},
-            "mailpit": {},
-            "terraform-backend-git": {}
+            "bun": {}
         }
     }
 }

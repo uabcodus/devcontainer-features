@@ -20,7 +20,10 @@ fi
 
 # Install prerequisites
 apt-get -y update
-apt-get -y install --no-install-recommends curl ca-certificates
+apt-get -y install --no-install-recommends curl ca-certificates unzip
+
+# Install Bun globally for all users
+export BUN_INSTALL=/usr/local
 
 # Install Bun binary latest or selected version
 if [ "${CLI_VERSION}" = "latest" ]; then
@@ -29,6 +32,9 @@ else
     # Normalize version input: accept v1.2.0 or 1.2.0 -> remove leading v
     curl -fsSL https://bun.com/install | bash -s "bun-v${CLI_VERSION#v}"
 fi
+
+# Ensure binary is executable and discoverable
+chmod 0755 /usr/local/bin/bun
 
 # Clean up
 apt-get -y clean

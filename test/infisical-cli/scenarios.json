@@ -5,10 +5,20 @@
             "infisical-cli": {}
         }
     },
-    "ubuntu": {
-        "image": "ubuntu:latest",
+    "debian-versioned": {
+        "image": "debian:latest",
         "features": {
-            "infisical-cli": {}
+            "infisical-cli": {
+                "version": "v0.43.51"
+            }
+        }
+    },
+    "debian-versioned-no-prefix": {
+        "image": "debian:latest",
+        "features": {
+            "infisical-cli": {
+                "version": "0.43.51"
+            }
         }
     }
 }
