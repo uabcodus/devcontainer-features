@@ -35,7 +35,7 @@ else
 fi
 
 # Download URL with normalized version input
-DDOWNLOAD_URL="https://github.com/Infisical/cli/releases/download/v${CLI_VERSION#v}/infisical_${CLI_VERSION#v}_linux_${ARCH}.deb"
+DDOWNLOAD_URL="https://github.com/infisical/cli/releases/download/v${CLI_VERSION#v}/infisical_${CLI_VERSION#v}_linux_${ARCH}.deb"
 
 # Set temporary location for debian binary
 tmp=/tmp/infisical.deb
@@ -43,7 +43,7 @@ tmp=/tmp/infisical.deb
 # Download and install infisical
 echo "Downloading infisical from ${DOWNLOAD_URL}"
 curl -fsSL "${DOWNLOAD_URL}" -o "$tmp" 
-apt-get -y install ./"$tmp"
+apt-get -y install "$tmp"
 
 # Remove binary after installation
 rm -f "$tmp"

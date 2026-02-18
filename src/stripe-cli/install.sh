@@ -43,7 +43,7 @@ tmp=/tmp/stripe.deb
 # Download and install stripe
 echo "Downloading stripe from ${DOWNLOAD_URL}"
 curl -fsSL "${DOWNLOAD_URL}" -o "$tmp" 
-apt-get -y install ./"$tmp"
+apt-get -y install "$tmp"
 
 # Remove binary after installation
 rm -f "$tmp"
