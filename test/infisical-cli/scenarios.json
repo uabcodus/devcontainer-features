@@ -9,7 +9,7 @@
         "image": "debian:latest",
         "features": {
             "infisical-cli": {
-                "version": "v0.43.0"
+                "version": "v0.43.51"
             }
         }
     },
@@ -17,7 +17,7 @@
         "image": "debian:latest",
         "features": {
             "infisical-cli": {
-                "version": "0.43.0"
+                "version": "0.43.51"
             }
         }
     }
