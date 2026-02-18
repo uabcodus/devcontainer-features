@@ -2,7 +2,6 @@
     "all_the_features": {
         "image": "ubuntu:latest",
         "features": {
-            "hcloud-cli": {},
             "infisical-cli": {},
             "bun": {},
             "stripe-cli": {}
