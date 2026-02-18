@@ -31,7 +31,7 @@ if [ "${CLI_VERSION}" = "latest" ]; then
     apt-get -y install infisical
 else
     # Normalize version input: accept v1.2.0 or 1.2.0 -> remove leading v
-    apt-get -y install "infisical=v${CLI_VERSION#v}"
+    apt-get -y install "infisical=${CLI_VERSION#v}"
 fi
 
 # Clean up
