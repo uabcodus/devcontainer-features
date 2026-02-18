@@ -27,6 +27,13 @@ if [ "${CLI_VERSION}" = "latest" ]; then
     CLI_VERSION=$(curl -s https://api.github.com/repos/stripe/stripe-cli/releases/latest | jq -r '.tag_name' | awk '{print substr($1, 2)}')
 fi
 
+# Detect current machine architecture
+if [ "$(uname -m)" = "aarch64" ]; then
+    ARCH="arm64"
+else
+    ARCH="amd64"
+fi
+
 # Download URL with normalized version input
 DOWNLOAD_URL="https://github.com/stripe/stripe-cli/releases/download/v${CLI_VERSION#v}/stripe_${CLI_VERSION#v}_linux_${ARCH}.deb"
 
