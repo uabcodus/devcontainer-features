@@ -20,7 +20,7 @@ fi
 
 # Install prerequisites
 apt-get -y update
-apt-get -y install --no-install-recommends curl ca-certificates
+apt-get -y install --no-install-recommends curl ca-certificates unzip
 
 # Install Bun binary latest or selected version
 if [ "${CLI_VERSION}" = "latest" ]; then
