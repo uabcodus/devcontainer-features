@@ -37,7 +37,7 @@ esac
 
 DOWNLOAD_URL="https://github.com/anomalyco/opencode/releases/download/v${CLI_VERSION#v}/opencode-linux-${ARCH}.tar.gz"
 
-echo "Downloading OpenCode v${CLI_VERSION} for ${ARCH}..."
+echo "Downloading OpenCode v${CLI_VERSION#v} for ${ARCH}..."
 TMP_DIR=$(mktemp -d)
 curl -fsSL "${DOWNLOAD_URL}" -o "${TMP_DIR}/opencode.tar.gz"
 
