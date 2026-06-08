@@ -12,47 +12,12 @@ Please take a closer look at the detailed instructions for the individual featur
 - [Bun Runtime](src/bun)
 - [Infisical CLI](src/infisical-cli)
 - [Stripe CLI](src/stripe-cli)
+- [Opencode CLI](src/stripe-cli)
 
 ## Repo and Feature Structure
 
 Similar to the [`devcontainers/features`](https://github.com/devcontainers/features) repo, this repository has a `src` folder.
 Each Feature has its own sub-folder, containing at least a `devcontainer-feature.json` and an entrypoint script `install.sh`. 
-
-```
-├── src
-│   ├── bun
-│   │   ├── devcontainer-feature.json
-│   │   └── install.sh
-│   ├── infisical-cli
-│   │   ├── devcontainer-feature.json
-│   │   └── install.sh
-│   ├── stripe-cli
-│   │   ├── devcontainer-feature.json
-│   │   └── install.sh
-├── test
-│   ├── __global
-│   │   ├── all_the_clis.sh
-│   │   └── scenarios.json
-│   ├── bun
-│   │   ├── scenarios.json
-│   │   ├── debian.json
-│   │   ├── debian-versioned.json
-│   │   ├── debian-versioned-no-prefix.json
-│   │   └── test.sh
-│   ├── infisical-cli
-│   │   ├── scenarios.json
-│   │   ├── debian.json
-│   │   ├── debian-versioned.json
-│   │   ├── debian-versioned-no-prefix.json
-│   │   └── test.sh
-│   ├── stripe-cli
-│   │   ├── scenarios.json
-│   │   ├── debian.json
-│   │   ├── debian-versioned.json
-│   │   ├── debian-versioned-no-prefix.json
-│   │   └── test.sh
-...
-```
 
 - [`src`](src) - A collection of subfolders, each declaring a Feature. Each subfolder contains at least a
   `devcontainer-feature.json` and an `install.sh` script.

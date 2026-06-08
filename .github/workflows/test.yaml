@@ -18,6 +18,7 @@ jobs:
           - infisical-cli
           - bun
           - stripe-cli
+          - opencode-cli
         baseImage:
           - debian:latest
           - mcr.microsoft.com/devcontainers/base:debian
@@ -42,6 +43,7 @@ jobs:
           - infisical-cli
           - bun
           - stripe-cli
+          - opencode-cli
 
     steps:
       - name: Checkout
