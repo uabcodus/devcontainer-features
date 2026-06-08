@@ -18,22 +18,37 @@ if [ "${ID}" != "debian" ] && [ "${ID_LIKE}" != "debian" ]; then
     exit 1
 fi
 
-# Install prerequisites
+# Install minimal prerequisites
 apt-get -y update
-apt-get -y install --no-install-recommends curl ca-certificates tar
+apt-get -y install --no-install-recommends curl ca-certificates jq tar
 
-DOWNLOAD_URL="https://opencode.ai/install"
-
-echo "Downloading opencode from ${DOWNLOAD_URL}"
-
-if [ "$CLI_VERSION" = "latest" ]; then
-    curl -fsSL "${DOWNLOAD_URL}" | bash -s -- --no-modify-path
-else
-    # Automatically read by the opencode installer script
-    export VERSION="${CLI_VERSION}"
-    curl -fsSL "${DOWNLOAD_URL}" | bash -s -- --no-modify-path
+# Fetch version tag
+if [ "${CLI_VERSION}" = "latest" ]; then
+    CLI_VERSION=$(curl -s https://api.github.com/repos/anomalyco/opencode/releases/latest | jq -r '.tag_name' | sed 's/^v//')
 fi
 
-# Clean up
+# Detect Architecture
+ARCH=$(uname -m)
+case "$ARCH" in
+    aarch64) ARCH="arm64" ;;
+    x86_64)  ARCH="x64" ;;
+    *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
+esac
+
+DOWNLOAD_URL="https://github.com/anomalyco/opencode/releases/download/v${CLI_VERSION#v}/opencode-linux-${ARCH}.tar.gz"
+
+echo "Downloading OpenCode v${CLI_VERSION} for ${ARCH}..."
+TMP_DIR=$(mktemp -d)
+curl -fsSL "${DOWNLOAD_URL}" -o "${TMP_DIR}/opencode.tar.gz"
+
+# Extract the tarball
+tar -xzf "${TMP_DIR}/opencode.tar.gz" -C "${TMP_DIR}"
+
+# Move binary to /usr/local/bin
+mv "${TMP_DIR}/opencode" /usr/local/bin/opencode
+chmod +x /usr/local/bin/opencode
+
+# Cleanup
+rm -rf "${TMP_DIR}"
 apt-get -y clean
 rm -rf /var/lib/apt/lists/*
