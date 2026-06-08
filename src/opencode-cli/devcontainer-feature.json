@@ -16,5 +16,17 @@
     },
     "installsAfter": [
         "ghcr.io/devcontainers/features/common-utils"
+    ],
+    "mounts": [
+        {
+        "source": "${localEnv:HOME}/.config/opencode/opencode.jsonc",
+        "target": "${containerUserHome}/.config/opencode/opencode.jsonc",
+        "type": "bind"
+        },
+        {
+        "source": "${localEnv:HOME}/.local/share/opencode/auth.json",
+        "target": "${containerUserHome}/.local/share/opencode/auth.json",
+        "type": "bind"
+        }
     ]
 }
