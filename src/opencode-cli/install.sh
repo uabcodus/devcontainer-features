@@ -27,11 +27,11 @@ DOWNLOAD_URL="https://opencode.ai/install"
 echo "Downloading opencode from ${DOWNLOAD_URL}"
 
 if [ "$CLI_VERSION" = "latest" ]; then
-    curl -fsSL "${DOWNLOAD_URL}" | bash -- --no-modify-path
+    curl -fsSL "${DOWNLOAD_URL}" | bash
 else
     # Automatically read by the opencode installer script
     export VERSION="${CLI_VERSION}"
-    curl -fsSL "${DOWNLOAD_URL}" | bash -- --no-modify-path
+    curl -fsSL "${DOWNLOAD_URL}" | bash
 fi
 
 # Clean up
