@@ -1,6 +1,6 @@
 {
     "id": "opencode-cli",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "name": "Opencode CLI",
     "documentationURL": "https://github.com/uabcodus/devcontainer-features/tree/master/src/opencode-cli",
     "description": "Installs Opencode CLI (opencode).",

@@ -48,6 +48,18 @@ tar -xzf "${TMP_DIR}/opencode.tar.gz" -C "${TMP_DIR}"
 mv "${TMP_DIR}/opencode" /usr/local/bin/opencode
 chmod +x /usr/local/bin/opencode
 
+TARGET_USER="${_REMOTE_USER:-vscode}"
+TARGET_HOME="${_REMOTE_USER_HOME:-/home/vscode}"
+
+# Pre-create dirs with correct ownership so Docker bind mounts
+# don't create parent dirs as root (which would cause EACCES)
+mkdir -p "${TARGET_HOME}/.config/opencode" \
+         "${TARGET_HOME}/.local/share/opencode" \
+         "${TARGET_HOME}/.local/state"
+chown -R "${TARGET_USER}:${TARGET_USER}" \
+         "${TARGET_HOME}/.config" \
+         "${TARGET_HOME}/.local"
+
 # Cleanup
 rm -rf "${TMP_DIR}"
 apt-get -y clean
