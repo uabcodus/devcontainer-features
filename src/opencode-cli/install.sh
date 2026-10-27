@@ -41,10 +41,36 @@ else
 fi
 
 TMP_DIR=$(mktemp -d)
-curl -fsSL "${DOWNLOAD_URL}" -o "${TMP_DIR}/opencode.tar.gz"
+ARCHIVE="${TMP_DIR}/opencode.tar.gz"
+
+# The archive is large and the CDN can reset or stall long downloads. Retry
+# failed attempts and resume from the already downloaded bytes.
+attempt=1
+max_attempts=5
+while [ "${attempt}" -le "${max_attempts}" ]; do
+    if curl -fsSL --connect-timeout 15 --speed-limit 1024 --speed-time 60 \
+        -C - "${DOWNLOAD_URL}" -o "${ARCHIVE}"; then
+        break
+    fi
+
+    # A resumed request can fail with HTTP 416 when the archive is already
+    # complete, so verify the file before deciding to retry.
+    if [ -s "${ARCHIVE}" ] && tar -tzf "${ARCHIVE}" >/dev/null 2>&1; then
+        break
+    fi
+
+    if [ "${attempt}" -eq "${max_attempts}" ]; then
+        echo "Failed to download OpenCode after ${max_attempts} attempts." >&2
+        exit 1
+    fi
+
+    echo "Download failed (attempt ${attempt}/${max_attempts}); retrying..." >&2
+    attempt=$((attempt + 1))
+    sleep 3
+done
 
 # Extract the tarball
-tar -xzf "${TMP_DIR}/opencode.tar.gz" -C "${TMP_DIR}"
+tar -xzf "${ARCHIVE}" -C "${TMP_DIR}"
 
 # Move binary to /usr/local/bin
 mv "${TMP_DIR}/opencode" /usr/local/bin/opencode
