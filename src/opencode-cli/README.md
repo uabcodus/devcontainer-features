@@ -7,7 +7,7 @@ Installs Opencode CLI (opencode).
 
 ```json
 "features": {
-    "ghcr.io/uabcodus/devcontainer-features/opencode-cli:1": {}
+    "ghcr.io/uabcodus/devcontainer-features/opencode-cli:2": {}
 }
 ```
 
