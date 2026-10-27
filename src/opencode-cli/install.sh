@@ -20,24 +20,26 @@ fi
 
 # Install minimal prerequisites
 apt-get -y update
-apt-get -y install --no-install-recommends curl ca-certificates jq tar
-
-# Fetch version tag
-if [ "${CLI_VERSION}" = "latest" ]; then
-    CLI_VERSION=$(curl -s https://api.github.com/repos/anomalyco/opencode/releases/latest | jq -r '.tag_name' | sed 's/^v//')
-fi
+apt-get -y install --no-install-recommends curl ca-certificates tar
 
 # Detect Architecture
 ARCH=$(uname -m)
 case "$ARCH" in
-    aarch64) ARCH="arm64" ;;
-    x86_64)  ARCH="x64" ;;
+    aarch64|arm64) ARCH="arm64" ;;
+    x86_64|amd64)  ARCH="x64" ;;
     *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
 esac
 
-DOWNLOAD_URL="https://github.com/anomalyco/opencode/releases/download/v${CLI_VERSION#v}/opencode-linux-${ARCH}.tar.gz"
+# Build the download URL from the official OpenCode binary endpoints
+if [ "${CLI_VERSION}" = "latest" ]; then
+    DOWNLOAD_URL="https://opencode.ai/update/api/latest/cli/opencode/opencode-linux-${ARCH}.tar.gz"
+    echo "Downloading latest OpenCode for ${ARCH}..."
+else
+    CLI_VERSION="${CLI_VERSION#v}"
+    DOWNLOAD_URL="https://opencode.ai/files/bin/${CLI_VERSION}/opencode-linux-${ARCH}.tar.gz"
+    echo "Downloading OpenCode v${CLI_VERSION} for ${ARCH}..."
+fi
 
-echo "Downloading OpenCode v${CLI_VERSION#v} for ${ARCH}..."
 TMP_DIR=$(mktemp -d)
 curl -fsSL "${DOWNLOAD_URL}" -o "${TMP_DIR}/opencode.tar.gz"
 
